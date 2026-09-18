@@ -1,0 +1,13 @@
+/**
+ * Accessibility Statement Tab Styling
+ */
+
+.exa11y-accessibility-statement-admin {
+    max-width: 800px;
+}
+
+.exa11y-section-description {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #555;
+}

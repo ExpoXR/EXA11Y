@@ -1,0 +1,94 @@
+/* Theme specific styles for light, dark, and high contrast modes */
+
+/* Light theme (default) */
+body.exa11y-theme-light #exa11y-content-wrapper {
+    background-color: #ffffff;
+    color: #333333;
+}
+
+/* Dark theme */
+body.exa11y-theme-dark #exa11y-content-wrapper,
+body.exa11y-theme-dark #exa11y-content-wrapper h1,
+body.exa11y-theme-dark #exa11y-content-wrapper h2,
+body.exa11y-theme-dark #exa11y-content-wrapper h3,
+body.exa11y-theme-dark #exa11y-content-wrapper h4,
+body.exa11y-theme-dark #exa11y-content-wrapper h5,
+body.exa11y-theme-dark #exa11y-content-wrapper h6,
+body.exa11y-theme-dark #exa11y-content-wrapper p,
+body.exa11y-theme-dark #exa11y-content-wrapper a,
+body.exa11y-theme-dark #exa11y-content-wrapper span,
+body.exa11y-theme-dark #exa11y-content-wrapper div {
+    background-color: #222222 !important;
+    color: #f0f0f0 !important;
+}
+
+body.exa11y-theme-dark #exa11y-content-wrapper a {
+    color: #4da6ff !important;
+}
+
+/* High contrast theme */
+body.exa11y-theme-high-contrast #exa11y-content-wrapper,
+body.exa11y-theme-high-contrast #exa11y-content-wrapper h1,
+body.exa11y-theme-high-contrast #exa11y-content-wrapper h2,
+body.exa11y-theme-high-contrast #exa11y-content-wrapper h3,
+body.exa11y-theme-high-contrast #exa11y-content-wrapper h4,
+body.exa11y-theme-high-contrast #exa11y-content-wrapper h5,
+body.exa11y-theme-high-contrast #exa11y-content-wrapper h6,
+body.exa11y-theme-high-contrast #exa11y-content-wrapper p,
+body.exa11y-theme-high-contrast #exa11y-content-wrapper span,
+body.exa11y-theme-high-contrast #exa11y-content-wrapper div {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+}
+
+body.exa11y-theme-high-contrast #exa11y-content-wrapper a {
+    color: #ffff00 !important;
+    text-decoration: underline !important;
+}
+
+/* Whole site theme application */
+body.exa11y-theme-dark {
+    background-color: #1a1a1a !important;
+    color: #e0e0e0 !important;
+}
+
+body.exa11y-theme-dark *:not(.exa11y-accessibility-controls *):not(.exa11y-accessibility-panel *) {
+    background-color: inherit !important;
+    color: inherit !important;
+}
+
+body.exa11y-theme-dark a:not(.exa11y-accessibility-controls a):not(.exa11y-accessibility-panel a) {
+    color: #6bb6ff !important;
+}
+
+body.exa11y-theme-high-contrast {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+body.exa11y-theme-high-contrast *:not(.exa11y-accessibility-controls *):not(.exa11y-accessibility-panel *) {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+}
+
+body.exa11y-theme-high-contrast a:not(.exa11y-accessibility-controls a):not(.exa11y-accessibility-panel a) {
+    color: #ffff00 !important;
+    text-decoration: underline !important;
+}
+
+/* Ensure accessibility controls are never affected by theme changes */
+.exa11y-accessibility-controls,
+.exa11y-accessibility-controls *,
+.exa11y-accessibility-panel,
+.exa11y-accessibility-panel * {
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+/* Theme transition effects */
+body.exa11y-theme-transition,
+body.exa11y-theme-transition * {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+}

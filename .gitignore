@@ -1,0 +1,49 @@
+# Ignore Visual Studio Code settings folder
+.vscode/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+git-commands.md
+
+# Ignore environment-specific files
+*.log
+.env
+
+# Ignore temporary files
+*.tmp
+*.bak
+*.swp
+
+# Ignore dependencies
+/node_modules/
+/vendor/
+
+# Ignore build artifacts
+/dist/
+/build/
+akismet/
+plugin-check/
+hello.php
+/index.php
+to-do.md
+/bin/
+AGENTS.md
+CLAUDE.md
+links.md
+package-lock.json
+package.json
+STRUCTURE.md
+.claude/
+AGENTS.md
+CLAUDE.md
+links.md
+STRUCTURE.md
+
+
+# Auto-generated WP Plugin Check scan reports — this plugins/ directory is a
+# live WordPress install, and something on that site (not this repo's own
+# hooks/build scripts) scans any plugin-shaped folder here and drops a
+# {slug}-{slug}-php-{timestamp}.json report in the plugins root. Safe to
+# delete locally; never intentionally produced by build.py/build-lite.py.
+/*-php-*.json

@@ -1,0 +1,98 @@
+/* Filter styles for visual adjustments */
+
+/* Font size adjustments - Base styles */
+body.exa11y-large-font #exa11y-content-wrapper:not(.exa11y-accessibility-panel):not(.wp-admin) {
+    --exa11y-text-scale: var(--exa11y-font-size-scale, 1);
+}
+
+/* Apply font scaling to all content elements. !important deliberately
+ * overrides any theme font-size on generic containers (div/span) so the
+ * control reaches text that isn't wrapped in a semantic p/a/li tag. */
+body.exa11y-large-font #exa11y-content-wrapper:not(.exa11y-accessibility-panel):not(.wp-admin),
+body.exa11y-large-font #exa11y-content-wrapper:not(.exa11y-accessibility-panel):not(.wp-admin) p,
+body.exa11y-large-font #exa11y-content-wrapper:not(.exa11y-accessibility-panel):not(.wp-admin) a,
+body.exa11y-large-font #exa11y-content-wrapper:not(.exa11y-accessibility-panel):not(.wp-admin) div,
+body.exa11y-large-font #exa11y-content-wrapper:not(.exa11y-accessibility-panel):not(.wp-admin) span,
+body.exa11y-large-font #exa11y-content-wrapper:not(.exa11y-accessibility-panel):not(.wp-admin) li {
+    font-size: calc(var(--exa11y-base-font-size) * var(--exa11y-text-scale)) !important;
+}
+
+/* Headers scale proportionally but maintain hierarchy. Anchored directly to
+ * --exa11y-base-font-size (not em) so heading size never depends on a parent
+ * element's computed font-size. */
+body.exa11y-large-font #exa11y-content-wrapper:not(.exa11y-accessibility-panel):not(.wp-admin) h1 { font-size: calc(var(--exa11y-base-font-size) * 2 * var(--exa11y-text-scale)) !important; }
+body.exa11y-large-font #exa11y-content-wrapper:not(.exa11y-accessibility-panel):not(.wp-admin) h2 { font-size: calc(var(--exa11y-base-font-size) * 1.75 * var(--exa11y-text-scale)) !important; }
+body.exa11y-large-font #exa11y-content-wrapper:not(.exa11y-accessibility-panel):not(.wp-admin) h3 { font-size: calc(var(--exa11y-base-font-size) * 1.5 * var(--exa11y-text-scale)) !important; }
+body.exa11y-large-font #exa11y-content-wrapper:not(.exa11y-accessibility-panel):not(.wp-admin) h4 { font-size: calc(var(--exa11y-base-font-size) * 1.25 * var(--exa11y-text-scale)) !important; }
+body.exa11y-large-font #exa11y-content-wrapper:not(.exa11y-accessibility-panel):not(.wp-admin) h5 { font-size: calc(var(--exa11y-base-font-size) * 1.1 * var(--exa11y-text-scale)) !important; }
+body.exa11y-large-font #exa11y-content-wrapper:not(.exa11y-accessibility-panel):not(.wp-admin) h6 { font-size: calc(var(--exa11y-base-font-size) * var(--exa11y-text-scale)) !important; }
+
+/* Neutralize general font scaling in the wp-admin context only. The panel's
+ * per-element font sizes are the single source in components/controls.css
+ * (.exa11y-panel-title / panel h3 / panel button / option label, etc.);
+ * duplicating that cascade here caused the panel `*` rule to override the
+ * per-element button size, so it lives solely in controls.css now. */
+.wp-admin,
+.wp-admin * {
+    font-size: var(--exa11y-menu-elements-font-size) !important;
+}
+
+/* Color Vision Deficiency Filters */
+.exa11y-red-weakness-active {
+    filter: url('data:image/svg+xml,\
+        <svg xmlns="http://www.w3.org/2000/svg">\
+            <filter id="protanopia">\
+                <feColorMatrix type="matrix" values="\
+                    0.567, 0.433, 0, 0, 0,\
+                    0.558, 0.442, 0, 0, 0,\
+                    0, 0.242, 0.758, 0, 0,\
+                    0, 0, 0, 1, 0"\
+                />\
+            </filter>\
+        </svg>#protanopia');
+}
+
+.exa11y-green-weakness-active {
+    filter: url('data:image/svg+xml,\
+        <svg xmlns="http://www.w3.org/2000/svg">\
+            <filter id="deuteranopia">\
+                <feColorMatrix type="matrix" values="\
+                    0.625, 0.375, 0, 0, 0,\
+                    0.7, 0.3, 0, 0, 0,\
+                    0, 0.3, 0.7, 0, 0,\
+                    0, 0, 0, 1, 0"\
+                />\
+            </filter>\
+        </svg>#deuteranopia');
+}
+
+.exa11y-blue-weakness-active {
+    filter: url('data:image/svg+xml,\
+        <svg xmlns="http://www.w3.org/2000/svg">\
+            <filter id="tritanopia">\
+                <feColorMatrix type="matrix" values="\
+                    0.95, 0.05, 0, 0, 0,\
+                    0, 0.433, 0.567, 0, 0,\
+                    0, 0.475, 0.525, 0, 0,\
+                    0, 0, 0, 1, 0"\
+                />\
+            </filter>\
+        </svg>#tritanopia');
+}
+
+/* Add smooth transitions for filter changes */
+#exa11y-content-wrapper {
+    transition: filter 0.3s ease-in-out;
+}
+
+/* Style for color vision deficiency filters */
+#exa11y-content-wrapper.exa11y-red-weakness-active,
+#exa11y-content-wrapper.exa11y-green-weakness-active,
+#exa11y-content-wrapper.exa11y-blue-weakness-active {
+    transition: filter 0.3s ease-in-out;
+}
+
+/* CVD filter sliders */
+input[id*="-weakness-slider"] {
+    transition: background 0.2s ease;
+}

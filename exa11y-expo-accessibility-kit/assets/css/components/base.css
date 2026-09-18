@@ -1,0 +1,48 @@
+/* Base styles and structural rules.
+ *
+ * All CSS custom properties (brand palette, typography, menu font sizes,
+ * filter variables) are defined in _tokens.css which is imported first by
+ * frontend.css. Do NOT redefine :root variables here — reference them via
+ * the --exa11y-* / --exa11y-* aliases already available from that import.
+ */
+
+/* Content wrapper styles */
+#exa11y-content-wrapper {
+    /* Make sure it covers the entire content area */
+    min-height: 100%;
+    width: 100%;
+    font-size: var(--exa11y-base-font-size);
+}
+
+/* Filter state classes (.high-contrast, .saturated, .bright,
+   .blue-filter-active, .gray-mode-active) live in components/filters.css. */
+
+/* Readable Font */
+.exa11y-readable-font-active * {
+    font-family: var(--exa11y-readable-font-family) !important;
+}
+
+.exa11y-readable-font-active .exa11y-accessibility-controls * {
+    font-family: inherit !important; /* Preserve accessibility controls font */
+}
+
+/* New class-based approach for applying readable font */
+.exa11y-apply-readable-font, 
+.exa11y-apply-readable-font * {
+    font-family: var(--exa11y-readable-font-family) !important;
+}
+
+/* Ensure accessibility controls keep their own font */
+.exa11y-apply-readable-font .exa11y-accessibility-controls, 
+.exa11y-apply-readable-font .exa11y-accessibility-controls * {
+    font-family: inherit !important;
+}
+
+/* Line height support */
+body.exa11y-increased-line-height #exa11y-content-wrapper,
+body.exa11y-increased-line-height #exa11y-content-wrapper p,
+body.exa11y-increased-line-height #exa11y-content-wrapper div,
+body.exa11y-increased-line-height #exa11y-content-wrapper span,
+body.exa11y-increased-line-height #exa11y-content-wrapper li {
+    line-height: calc(1.4 * var(--exa11y-line-height-scale)) !important;
+}

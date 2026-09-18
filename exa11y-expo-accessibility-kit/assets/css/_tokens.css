@@ -1,0 +1,115 @@
+/**
+ * EXA11Y / ExpoXR design tokens — ExploreXR design system.
+ *
+ * Single source of truth for the brand palette, typography and shared UI
+ * primitives. Imported by both the front-end bundle (frontend.css) and the
+ * admin skin (admin/css/admin-base.css) so the plugin's look stays consistent
+ * across wp-admin and the front end, and matches the sibling ExploreXR plugin.
+ *
+ * Do not hard-code brand colours elsewhere; reference these custom properties.
+ */
+:root {
+    /* Brand palette (ExploreXR) */
+    --exa11y-brand:            #2AACE2; /* ExploreXR primary blue */
+    --exa11y-brand-dark:       #1e8bb8; /* AA-safe on white for text-sized elements */
+    --exa11y-brand-darker:     #156a8a;
+    --exa11y-on-brand:         #0D152C;
+    --exa11y-secondary:        #0D152C; /* ExploreXR navy */
+    --exa11y-ink:              #0D152C; /* primary text */
+    --exa11y-ink-soft:         #50575e;
+    --exa11y-surface:          #ffffff;
+    --exa11y-surface-alt:      #f8f9fa;
+    --exa11y-surface-band:     #E4E9EC; /* card header/footer band */
+    --exa11y-border:           #dcdcde;
+    --exa11y-light:            #f8f9fa;
+    --exa11y-dark:             #343a40;
+
+    /* Animated brand gradient (header banner, accent stripes) */
+    --exa11y-gradient: linear-gradient(135deg, #4555A5 0%, #13BCD4 25%, #F36E24 50%, #EF4681 75%, #4555A5 100%);
+    --exa11y-gradient-stripe: linear-gradient(270deg, #4555A5, #13BCD4, #F36E24, #EF4681, #4555A5);
+
+    /* Typography — WP admin system stack (matches ExploreXR) */
+    --exa11y-font-heading: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    --exa11y-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+    /* Shape & spacing */
+    --exa11y-shadow:       0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+    --exa11y-shadow-hover: 0 3px 8px rgba(0, 0, 0, 0.15);
+
+    /* Focus ring (accessibility-first) */
+    --exa11y-focus:        0 0 0 3px rgba(42, 172, 226, 0.5);
+
+    /* Semantic aliases */
+    --exa11y-primary-color:    var(--exa11y-brand);
+    --exa11y-text-font:        var(--exa11y-font-body);
+
+    /* Accessibility widget — system UI font stack isolated from theme fonts */
+    --exa11y-accessibility-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+
+    /* Readable-font override (applied dynamically by JS) */
+    --exa11y-readable-font-family: var(--exa11y-text-font);
+
+    /* Base font size for the content wrapper */
+    --exa11y-base-font-size:   16px;
+    --exa11y-font-size-scale:  1;
+    --exa11y-text-scale:       var(--exa11y-font-size-scale, 1);
+
+    /* Menu font size variables (overridden at runtime by frontend.js) */
+    --exa11y-menu-header-font-size:    18px;
+    --exa11y-menu-subheader-font-size: 16px;
+    --exa11y-menu-buttons-font-size:   14px;
+    --exa11y-menu-text-font-size:      14px;
+    --exa11y-menu-elements-font-size:  14px;
+
+    /* Line height (overridden at runtime by JS) */
+    --exa11y-line-height-scale: 1;
+
+    /* ------------------------------------------------------------------ *
+     * Front-end accessibility widget contract.
+     *
+     * Single styling contract for the whole widget (trigger icon, panel,
+     * submenu toggles, buttons, checkboxes, sliders). Every value is
+     * overridden at runtime by a matching :root block emitted from
+     * class-accessibility.php (build_menu_css_variables()), which derives
+     * each one from an exa11y_ setting. The component CSS consumes ONLY
+     * these variables — never hard-coded colours — so admin settings fully
+     * drive the widget's appearance.
+     *
+     * The defaults below MUST stay in sync with exa11y_get_default_settings()
+     * in includes/core/class-settings-defaults.php.
+     * ------------------------------------------------------------------ */
+
+    /* Trigger icon (floating button) */
+    --exa11y-menu-toggle-bg:        #2AACE2;
+    --exa11y-menu-toggle-icon:      #ffffff;
+    --exa11y-menu-toggle-hover-bg:  #1e8bb8; /* hover_button_color */
+    --exa11y-menu-toggle-size:      52px;
+    --exa11y-menu-toggle-radius:    50%;
+
+    /* Panel surface */
+    --exa11y-menu-panel-bg:     #ffffff;
+    --exa11y-menu-panel-text:   #333333;
+    --exa11y-menu-panel-border: #e6e6e6; /* derived from panel-bg */
+    --exa11y-menu-panel-radius: 12px;
+    --exa11y-menu-panel-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    --exa11y-menu-panel-pad:    20px;
+
+    /* Hover surface (submenu toggles, option rows) */
+    --exa11y-menu-hover-bg:   #f0f0f0;
+
+    /* Buttons (option / feature / theme / reset) */
+    --exa11y-menu-btn-bg:     #2AACE2;
+    --exa11y-menu-btn-text:   #ffffff;
+    --exa11y-menu-btn-border: #2AACE2;
+    --exa11y-menu-btn-radius: 4px;
+    --exa11y-menu-btn-pad:    8px;
+    --exa11y-menu-btn-active: #2AACE2; /* active_button_color */
+    --exa11y-menu-btn-hover:  #1e8bb8; /* hover_button_color */
+
+    /* Sliders */
+    --exa11y-menu-slider-track: #dddddd;
+    --exa11y-menu-slider-thumb: #2AACE2;
+
+    /* Focus ring (derived from active_button_color) */
+    --exa11y-menu-focus-ring: 0 0 0 3px rgba(42, 172, 226, 0.5);
+}

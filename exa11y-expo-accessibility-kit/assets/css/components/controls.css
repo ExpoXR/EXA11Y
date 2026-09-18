@@ -1,0 +1,494 @@
+/**
+ * EXA11Y front-end widget — controls (EyeAble-style tile grid).
+ *
+ * Canonical stylesheet for the floating accessibility widget: trigger icon,
+ * dialog panel (header / scrolling body / footer), feature groups, tile grid,
+ * toggle tiles, stepper tiles, reset and branding. All colours/shape come from
+ * the --exa11y-menu-* variable contract in _tokens.css, which
+ * class-accessibility.php overrides at runtime from the exa11y_ admin settings.
+ * Never hard-code brand colours here.
+ *
+ * Keyboard focus behaviour lives in keyboard.css; breakpoints in responsive.css.
+ */
+
+/* ------------------------------------------------------------------ *
+ * Container & theme isolation
+ * ------------------------------------------------------------------ */
+.exa11y-accessibility-controls {
+    position: fixed;
+    bottom: 20px;
+    z-index: 999999;
+    filter: none !important;
+    will-change: transform;
+    font-family: var(--exa11y-accessibility-font) !important;
+}
+
+/* Reset properties themes commonly override, so the widget renders the same
+ * everywhere. font-size is intentionally left out so the --menu-*-font-size
+ * variables can drive per-element sizing. */
+.exa11y-accessibility-controls,
+.exa11y-accessibility-controls *,
+.exa11y-accessibility-controls *::before,
+.exa11y-accessibility-controls *::after {
+    font-family: var(--exa11y-accessibility-font) !important;
+    line-height: 1.4 !important;
+    letter-spacing: normal !important;
+    font-weight: normal !important;
+    text-transform: none !important;
+    box-sizing: border-box !important;
+}
+
+/* Per-element font sizes, driven by the --menu-*-font-size variables set at
+ * runtime by frontend.js. */
+.exa11y-panel-title {
+    font-size: var(--exa11y-menu-header-font-size) !important;
+}
+
+.exa11y-group-title {
+    font-size: var(--exa11y-menu-subheader-font-size) !important;
+}
+
+.exa11y-accessibility-panel button,
+.exa11y-accessibility-panel .exa11y-btn {
+    font-size: var(--exa11y-menu-buttons-font-size) !important;
+}
+
+.exa11y-tile-label,
+.exa11y-accessibility-panel p,
+.exa11y-accessibility-panel li {
+    font-size: var(--exa11y-menu-elements-font-size) !important;
+}
+
+.exa11y-tile-label-sub,
+.exa11y-stepper-value {
+    font-size: var(--exa11y-menu-text-font-size) !important;
+}
+
+/* ------------------------------------------------------------------ *
+ * Trigger icon (floating button)
+ * ------------------------------------------------------------------ */
+.exa11y-accessibility-toggle {
+    width: var(--exa11y-menu-toggle-size);
+    height: var(--exa11y-menu-toggle-size);
+    border-radius: var(--exa11y-menu-toggle-radius);
+    background-color: var(--exa11y-menu-toggle-bg);
+    color: var(--exa11y-menu-toggle-icon);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.exa11y-accessibility-toggle:hover,
+.exa11y-accessibility-toggle[aria-expanded="true"] {
+    background-color: var(--exa11y-menu-toggle-hover-bg);
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.exa11y-accessibility-toggle:focus-visible {
+    outline: none;
+    box-shadow: var(--exa11y-menu-focus-ring);
+}
+
+.exa11y-toggle-svg {
+    width: 26px;
+    height: 26px;
+    display: block;
+    fill: currentColor;
+    pointer-events: none;
+}
+
+/* ------------------------------------------------------------------ *
+ * Panel shell
+ * ------------------------------------------------------------------ */
+.exa11y-accessibility-panel {
+    position: absolute;
+    bottom: 70px;
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    max-width: calc(100vw - 40px);
+    max-height: calc(85vh - 80px);
+    padding: 0;
+    background-color: var(--exa11y-menu-panel-bg);
+    color: var(--exa11y-menu-panel-text);
+    border: 1px solid var(--exa11y-menu-panel-border);
+    border-radius: var(--exa11y-menu-panel-radius);
+    box-shadow: var(--exa11y-menu-panel-shadow);
+    filter: none !important;
+    overflow: hidden;
+    /* Fade open/close via opacity + visibility only (no transform) so it never
+     * conflicts with the positioning transform class-accessibility.php applies
+     * inline for centre/left/right placement. */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    pointer-events: none;
+}
+
+.exa11y-accessibility-panel.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Font isolation inside the panel (link underlines are deliberately preserved). */
+.exa11y-accessibility-panel,
+.exa11y-accessibility-panel *,
+.exa11y-accessibility-panel *::before,
+.exa11y-accessibility-panel *::after {
+    font-family: var(--exa11y-accessibility-font) !important;
+    line-height: 1.4 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+    font-style: normal !important;
+    box-sizing: border-box !important;
+}
+
+/* Header ------------------------------------------------------------ */
+.exa11y-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px var(--exa11y-menu-panel-pad);
+    background-color: var(--exa11y-menu-hover-bg);
+    border-bottom: 1px solid var(--exa11y-menu-panel-border);
+    flex: 0 0 auto;
+}
+
+.exa11y-panel-title {
+    margin: 0;
+    font-weight: 600;
+    color: var(--exa11y-menu-panel-text);
+}
+
+.exa11y-panel-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    color: var(--exa11y-menu-panel-text);
+    cursor: pointer;
+    flex: 0 0 auto;
+    transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.exa11y-panel-close:hover,
+.exa11y-panel-close:focus {
+    background-color: var(--exa11y-menu-btn-active);
+    color: var(--exa11y-menu-btn-text);
+}
+
+.exa11y-panel-close:focus-visible {
+    outline: none;
+    box-shadow: var(--exa11y-menu-focus-ring);
+}
+
+/* Body (scroll area) ------------------------------------------------ */
+.exa11y-panel-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: var(--exa11y-menu-panel-pad);
+    scrollbar-width: thin;
+    scrollbar-color: var(--exa11y-menu-btn-active) var(--exa11y-menu-panel-border);
+}
+
+.exa11y-panel-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.exa11y-panel-body::-webkit-scrollbar-track {
+    background: var(--exa11y-menu-panel-border);
+    border-radius: 3px;
+}
+
+.exa11y-panel-body::-webkit-scrollbar-thumb {
+    background-color: var(--exa11y-menu-btn-active);
+    border-radius: 3px;
+}
+
+/* ------------------------------------------------------------------ *
+ * Feature groups & grid
+ * ------------------------------------------------------------------ */
+.exa11y-group {
+    margin: 0 0 18px;
+}
+
+.exa11y-group:last-child {
+    margin-bottom: 0;
+}
+
+.exa11y-group-title {
+    margin: 0 0 10px;
+    font-weight: 600;
+    color: var(--exa11y-menu-panel-text);
+    opacity: 0.75;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+    font-size: 12px !important;
+}
+
+.exa11y-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+/* ------------------------------------------------------------------ *
+ * Tiles (shared base for toggle / stepper / link tiles)
+ * ------------------------------------------------------------------ */
+.exa11y-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    min-height: 92px;
+    padding: 14px 10px;
+    background-color: var(--exa11y-menu-hover-bg);
+    color: var(--exa11y-menu-panel-text);
+    border: 1px solid var(--exa11y-menu-panel-border);
+    border-radius: var(--exa11y-menu-panel-radius);
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.05s ease;
+}
+
+.exa11y-tile:hover {
+    border-color: var(--exa11y-menu-btn-active);
+}
+
+.exa11y-tile:active {
+    transform: translateY(1px);
+}
+
+.exa11y-tile:focus-visible {
+    outline: none;
+    box-shadow: var(--exa11y-menu-focus-ring);
+}
+
+.exa11y-tile-icon {
+    width: 24px;
+    height: 24px;
+    flex: 0 0 auto;
+    fill: currentColor;
+    pointer-events: none;
+}
+
+.exa11y-tile-label {
+    display: block;
+    color: inherit;
+    font-weight: 500;
+    line-height: 1.25 !important;
+}
+
+/* Active state — toggle tiles set aria-pressed; feature JS also toggles .active
+ * for back-compat. Both light the tile with the brand/active colour. */
+.exa11y-tile-toggle[aria-pressed="true"],
+.exa11y-tile.active {
+    background-color: var(--exa11y-menu-btn-active);
+    border-color: var(--exa11y-menu-btn-active);
+    color: var(--exa11y-menu-btn-text);
+}
+
+/* Disabled tiles */
+.exa11y-tile:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.exa11y-tile:disabled:hover {
+    border-color: var(--exa11y-menu-panel-border);
+}
+
+/* Toggle and link tiles take a single grid column (~1/3 width on desktop). */
+.exa11y-tile-toggle,
+.exa11y-tile-link {
+    grid-column: span 1;
+}
+
+/* ------------------------------------------------------------------ *
+ * Stepper tiles (graded controls: font size, filters, CVD) — always
+ * span the full row so their label and stepper controls have room.
+ * ------------------------------------------------------------------ */
+.exa11y-tile-stepper {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+    min-height: 0;
+    gap: 8px 12px;
+    cursor: default;
+}
+
+.exa11y-tile-stepper:hover {
+    border-color: var(--exa11y-menu-panel-border);
+}
+
+.exa11y-tile-stepper .exa11y-tile-label {
+    flex: 1 1 0%;
+    min-width: 0;
+    text-align: left;
+}
+
+.exa11y-tile-label-text {
+    display: block;
+}
+
+.exa11y-tile-label-sub {
+    display: block;
+    margin-top: 1px;
+    font-size: 0.85em;
+    font-weight: 400;
+    opacity: 0.75;
+}
+
+.exa11y-stepper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: auto;
+    flex: 0 0 auto;
+    justify-content: flex-end;
+}
+
+.exa11y-stepper-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    font-size: 18px !important;
+    line-height: 1 !important;
+    background-color: var(--exa11y-menu-btn-bg);
+    color: var(--exa11y-menu-btn-text);
+    border: 1px solid var(--exa11y-menu-btn-border);
+    border-radius: var(--exa11y-menu-btn-radius);
+    cursor: pointer;
+    flex: 0 0 auto;
+    transition: background-color 0.15s ease;
+}
+
+.exa11y-stepper-btn:hover {
+    background-color: var(--exa11y-menu-btn-hover);
+    border-color: var(--exa11y-menu-btn-hover);
+}
+
+.exa11y-stepper-btn:focus-visible {
+    outline: none;
+    box-shadow: var(--exa11y-menu-focus-ring);
+}
+
+.exa11y-stepper-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.exa11y-stepper-value {
+    min-width: 44px;
+    text-align: center;
+    font-weight: 600 !important;
+    color: var(--exa11y-menu-btn-active);
+}
+
+/* Thin progress bar reflecting the current level within its range. */
+.exa11y-stepper-track {
+    display: block;
+    flex: 1 1 100%;
+    width: 100%;
+    height: 4px;
+    margin-top: 2px;
+    background-color: var(--exa11y-menu-slider-track);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.exa11y-stepper-fill {
+    display: block;
+    width: 0;
+    height: 100%;
+    background-color: var(--exa11y-menu-slider-thumb);
+    border-radius: 2px;
+    transition: width 0.15s ease;
+}
+
+/* ------------------------------------------------------------------ *
+ * Footer (reset)
+ * ------------------------------------------------------------------ */
+.exa11y-panel-footer {
+    flex: 0 0 auto;
+    padding: 14px var(--exa11y-menu-panel-pad);
+    border-top: 1px solid var(--exa11y-menu-panel-border);
+    background-color: var(--exa11y-menu-panel-bg);
+}
+
+.exa11y-btn-reset {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: calc(var(--exa11y-menu-btn-pad) + 2px) calc(var(--exa11y-menu-btn-pad) * 1.5);
+    background-color: var(--exa11y-menu-btn-bg);
+    color: var(--exa11y-menu-btn-text);
+    border: 1px solid var(--exa11y-menu-btn-border);
+    border-radius: var(--exa11y-menu-btn-radius);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.05s ease;
+}
+
+.exa11y-btn-reset .exa11y-tile-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.exa11y-btn-reset:hover {
+    background-color: var(--exa11y-menu-btn-hover);
+    border-color: var(--exa11y-menu-btn-hover);
+}
+
+.exa11y-btn-reset:active {
+    transform: translateY(1px);
+}
+
+.exa11y-btn-reset:focus-visible {
+    outline: none;
+    box-shadow: var(--exa11y-menu-focus-ring);
+}
+
+/* ------------------------------------------------------------------ *
+ * Hard theme-interference guard (fonts; dashicons inside the panel still
+ * need their icon font).
+ * ------------------------------------------------------------------ */
+html body .exa11y-accessibility-controls,
+html body .exa11y-accessibility-controls *,
+html body .exa11y-accessibility-panel,
+html body .exa11y-accessibility-panel * {
+    font-family: var(--exa11y-accessibility-font) !important;
+    line-height: 1.4 !important;
+    letter-spacing: normal !important;
+}
+
+html body .exa11y-accessibility-controls .dashicons,
+html body .exa11y-accessibility-panel .dashicons,
+html body .exa11y-accessibility-panel .dashicons::before {
+    font-family: dashicons !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+}

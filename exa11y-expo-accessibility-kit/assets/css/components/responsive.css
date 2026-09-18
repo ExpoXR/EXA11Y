@@ -1,0 +1,91 @@
+/**
+ * exa11y — Responsive & UI refinements
+ *
+ * Additive layer (loaded after controls.css) that makes the accessibility
+ * widget responsive, improves focus visibility and touch targets, and honours
+ * the hide-on-mobile setting and reduced-motion preferences. Scoped to the
+ * plugin's own classes so it never affects the host theme.
+ */
+
+/* --- Phones: full-width bottom sheet ------------------------------------ *
+ * On phones the popover model breaks: the panel is anchored to the toggle
+ * button (position:absolute, inline transforms from class-accessibility.php),
+ * which pushes it off-screen and causes horizontal overflow. Override it into
+ * a fixed, full-width bottom sheet that ignores the button anchor entirely.  */
+@media (max-width: 600px) {
+    .exa11y-hide-on-mobile {
+        display: none !important;
+    }
+
+    .exa11y-accessibility-panel {
+        position: fixed !important;
+        top: auto !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        max-height: 85vh !important;
+        border-radius: 16px 16px 0 0 !important;
+        /* Slide up from the bottom edge (overrides the inline positioning
+           transform, which is irrelevant once we anchor to the viewport). */
+        transform: translateY(100%) !important;
+        transition: transform 0.25s ease, opacity 0.2s ease, visibility 0.2s ease !important;
+    }
+
+    .exa11y-accessibility-panel.active {
+        transform: translateY(0) !important;
+    }
+
+    /* Two tile columns on phone-width sheets — toggle/link tiles read ~50%
+       wide; steppers still span both columns via grid-column: 1 / -1. */
+    .exa11y-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* --- Tablets: keep the popover but fit it on-screen --------------------- *
+ * Between phone and desktop the anchored popover is fine as long as it can
+ * never exceed the viewport, so cap its width/height without changing the
+ * positioning model.                                                        */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .exa11y-accessibility-panel {
+        width: min(420px, 92vw) !important;
+        max-width: 92vw !important;
+        max-height: 80vh !important;
+    }
+}
+
+/* --- Larger, more reliable touch targets -------------------------------- */
+@media (pointer: coarse) {
+    .exa11y-accessibility-panel button,
+    .exa11y-accessibility-panel .exa11y-btn,
+    .exa11y-accessibility-panel [role="button"] {
+        min-height: 44px;
+    }
+
+    .exa11y-stepper-btn {
+        min-width: 44px;
+    }
+}
+
+/* --- Stronger, consistent keyboard focus visibility --------------------- */
+.exa11y-accessibility-toggle:focus-visible,
+.exa11y-accessibility-panel button:focus-visible,
+.exa11y-accessibility-panel a:focus-visible,
+.exa11y-accessibility-panel input:focus-visible,
+.exa11y-accessibility-panel select:focus-visible,
+.exa11y-accessibility-panel [tabindex]:focus-visible {
+    outline: 3px solid var(--exa11y-menu-btn-active);
+    outline-offset: 2px;
+}
+
+/* --- Respect reduced-motion -------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    .exa11y-accessibility-toggle,
+    .exa11y-accessibility-panel,
+    .exa11y-accessibility-panel * {
+        transition: none !important;
+        animation: none !important;
+    }
+}

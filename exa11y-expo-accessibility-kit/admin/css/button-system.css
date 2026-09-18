@@ -1,0 +1,57 @@
+/**
+ * EXA11Y Button System — WordPress button overrides (plugin pages only).
+ *
+ * Brand colours come from the shared design tokens (assets/css/_tokens.css);
+ * never redefine them here.
+ */
+
+.exa11y-admin-wrap .button:not(.exa11y-button) {
+    background: linear-gradient(135deg, var(--exa11y-secondary) 0%, #1a2332 100%);
+    border: 1px solid transparent;
+    color: #fff;
+    font-weight: 500;
+    padding: 4px 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(13, 21, 44, 0.3);
+    text-shadow: none;
+}
+
+.exa11y-admin-wrap .button:not(.exa11y-button):hover {
+    background: linear-gradient(135deg, #1a2332 0%, #262d3d 100%);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(13, 21, 44, 0.4);
+}
+
+.exa11y-admin-wrap .button-primary:not(.exa11y-button) {
+    background: linear-gradient(135deg, var(--exa11y-brand) 0%, var(--exa11y-brand-dark) 100%);
+    box-shadow: 0 3px 6px rgba(42, 172, 226, 0.4);
+    font-weight: 600;
+}
+
+.exa11y-admin-wrap .button-primary:not(.exa11y-button):hover {
+    background: linear-gradient(135deg, var(--exa11y-brand-dark) 0%, var(--exa11y-brand-darker) 100%);
+    box-shadow: 0 5px 10px rgba(42, 172, 226, 0.5);
+    transform: translateY(-2px);
+}
+
+.exa11y-admin-wrap .button-secondary:not(.exa11y-button):not(.button-primary) {
+    background: var(--exa11y-light);
+    color: var(--exa11y-dark);
+    border: 1px solid #dee2e6;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+}
+
+.exa11y-admin-wrap .button-secondary:not(.exa11y-button):not(.button-primary):hover {
+    background: #e9ecef;
+    color: var(--exa11y-dark);
+    border-color: #adb5bd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.exa11y-admin-wrap .button:focus,
+.exa11y-admin-wrap .exa11y-button:focus {
+    box-shadow: var(--exa11y-focus);
+    outline: 2px solid transparent;
+}

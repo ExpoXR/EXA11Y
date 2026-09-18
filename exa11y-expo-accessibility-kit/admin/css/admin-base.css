@@ -1,0 +1,48 @@
+/**
+ * EXA11Y plugin-page skin (hybrid).
+ *
+ * Loaded only on EXA11Y's own admin screens. Maps the shared ExpoXR design
+ * tokens onto WordPress-native structure (.wrap, .form-table, .nav-tab,
+ * .postbox, .button) so plugin pages read as standard WP admin with ExpoXR
+ * branding, rather than a wholly bespoke UI.
+ *
+ * This complements the existing admin.css; new/migrated pages should rely on
+ * native WP markup + these rules instead of the legacy .exa11y-* framework.
+ */
+@import url('../../assets/css/_tokens.css');
+
+/* Headings */
+.exa11y-admin-wrap h1,
+.exa11y-admin-wrap h2.title {
+    font-family: var(--exa11y-font-heading);
+    color: var(--exa11y-ink);
+}
+
+.exa11y-admin-wrap,
+.exa11y-admin-wrap p,
+.exa11y-admin-wrap label,
+.exa11y-admin-wrap td,
+.exa11y-admin-wrap th {
+    font-family: var(--exa11y-font-body);
+    color: var(--exa11y-ink);
+}
+
+.exa11y-admin-wrap .postbox {
+    border-color: var(--exa11y-border);
+    box-shadow: var(--exa11y-shadow);
+}
+
+.exa11y-admin-wrap .postbox .postbox-header {
+    border-bottom-color: var(--exa11y-border);
+}
+
+/* Buttons on plugin pages are styled by the ExploreXR button system
+   (admin/css/button-system.css, bundled into admin.css). */
+
+/* Brand focus ring. Covers input types not overridden by admin.css's more
+   specific input[type="..."] rules (e.g. date, color, range); select/textarea
+   focus styling is owned by admin.css, which loads after this file. */
+.exa11y-admin-wrap input:focus {
+    border-color: var(--exa11y-brand-dark);
+    box-shadow: var(--exa11y-focus);
+}

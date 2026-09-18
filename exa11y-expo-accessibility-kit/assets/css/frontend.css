@@ -1,0 +1,23 @@
+/**
+ * EXA11Y front-end CSS entry point.
+ *
+ * Imports every front-end component stylesheet via native @import; no build
+ * step, the browser resolves the chain directly.
+ *
+ * Order matters: tokens first (variable contract), component styles next, then
+ * keyboard focus and responsive overrides last so they take precedence.
+ */
+
+/* Shared ExpoXR design tokens — single source of brand colours/typography. */
+@import url('_tokens.css');
+
+/* Base + widget components */
+@import url('components/base.css');
+@import url('components/controls.css');
+@import url('components/filters.css');
+@import url('components/themes.css');
+@import url('components/screenreader.css');
+
+/* Focus behaviour and responsive overrides last. */
+@import url('components/keyboard.css');
+@import url('components/responsive.css');

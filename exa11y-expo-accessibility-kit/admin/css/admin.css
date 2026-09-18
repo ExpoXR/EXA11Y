@@ -1,0 +1,1651 @@
+/* EXA11Y Admin Styles — ExploreXR design system */
+
+/* Functional button system */
+@import url('button-system.css');
+
+/*
+ * Brand tokens (--exa11y-*) are defined once in assets/css/_tokens.css and loaded
+ * via admin-base.css (an enqueue dependency of this stylesheet). Do not redefine
+ * them here — reference the shared custom properties so the palette stays in sync
+ * across wp-admin and the front end.
+ */
+
+/* ========================================
+   Page chrome: gradient header, quick actions, footer
+   (ported from the ExploreXR design system)
+   ======================================== */
+
+@keyframes axrGradientMove {
+    0%   { background-position: 0% 50%; }
+    25%  { background-position: 100% 50%; }
+    50%  { background-position: 100% 50%; }
+    75%  { background-position: 0% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.exa11y-admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 25px 0;
+    padding: 25px 30px;
+    background: var(--exa11y-gradient);
+    background-size: 400% 400%;
+    animation: axrGradientMove 30s ease infinite;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.exa11y-admin-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+}
+
+.exa11y-admin-header * {
+    position: relative;
+    z-index: 2;
+}
+
+.exa11y-admin-header h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    line-height: 1.3;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border-bottom: none;
+}
+
+.exa11y-admin-header .exa11y-version {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 0;
+    font-size: 12px;
+    font-weight: 500;
+    margin-left: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    vertical-align: middle;
+}
+
+.exa11y-header-actions a,
+.exa11y-header-actions button {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 8px 16px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.exa11y-header-actions a:hover,
+.exa11y-header-actions button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Quick actions navigation */
+.exa11y-quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.exa11y-quick-actions a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    background: var(--exa11y-surface);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: var(--exa11y-brand-dark);
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.exa11y-quick-actions a:hover {
+    background: #f7f7f7;
+    color: var(--exa11y-brand-darker);
+}
+
+.exa11y-quick-actions a.active {
+    background: var(--exa11y-secondary);
+    color: #fff;
+}
+
+.exa11y-quick-actions a .dashicons {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+/* Branded footer with ExpoXR family branding */
+.exa11y-admin-footer {
+    margin: 40px 0 0 0;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, #F8FAFC 0%, #E5E7F2 100%);
+    border-radius: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.exa11y-admin-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--exa11y-gradient-stripe);
+    background-size: 400% 400%;
+    animation: axrGradientMove 20s ease infinite;
+}
+
+.exa11y-footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.exa11y-footer-branding {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.exa11y-footer-logo {
+    height: 40px;
+    width: auto;
+}
+
+.exa11y-footer-text {
+    margin: 0;
+    color: var(--exa11y-secondary);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.exa11y-footer-text strong {
+    color: var(--exa11y-brand-dark);
+    font-weight: 600;
+}
+
+.exa11y-footer-links {
+    display: flex;
+    gap: 20px;
+}
+
+.exa11y-footer-links a {
+    color: var(--exa11y-brand-dark);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.exa11y-footer-links a:hover {
+    color: var(--exa11y-brand-darker);
+    text-decoration: underline;
+}
+
+.exa11y-footer-credit {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 15px auto 0;
+    color: var(--exa11y-ink-soft);
+    font-size: 12px;
+}
+
+.exa11y-footer-credit a {
+    color: var(--exa11y-brand-dark);
+    text-decoration: none;
+}
+
+.exa11y-footer-credit a:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 782px) {
+    .exa11y-admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .exa11y-admin-header .exa11y-header-actions {
+        margin-top: 15px;
+    }
+
+    .exa11y-quick-actions a {
+        width: 100%;
+    }
+
+    .exa11y-footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .exa11y-footer-branding {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .exa11y-footer-links {
+        justify-content: center;
+    }
+}
+
+/* Hide the default WordPress admin footer on EXA11Y screens only
+   (this stylesheet is enqueued solely on the plugin's own pages). */
+#wpfooter {
+    display: none;
+}
+
+/* Reset/Base for the plugin admin area */
+.exa11y-admin-wrap {
+    font-family: var(--exa11y-font-body);
+    background-color: var(--exa11y-surface-alt);
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Page-based Interface Styles */
+.exa11y-page-intro {
+    background: var(--exa11y-surface);
+    border: 1px solid var(--exa11y-border);
+    border-left: 4px solid var(--exa11y-brand);
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: var(--exa11y-shadow);
+}
+
+.exa11y-page-intro p {
+    margin: 0;
+    color: var(--exa11y-ink);
+    font-size: 14px;
+    line-height: 1.5;
+    font-family: var(--exa11y-font-body);
+}
+
+/* Section cards (ExploreXR card look: header band + white content) */
+.exa11y-section {
+    background: var(--exa11y-surface);
+    border-radius: 0;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--exa11y-shadow);
+    overflow: hidden;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.exa11y-section:hover {
+    box-shadow: var(--exa11y-shadow-hover);
+}
+
+.exa11y-section h2 {
+    margin-top: 0 !important;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--exa11y-border);
+    color: var(--exa11y-ink);
+    font-size: 18px;
+    font-weight: 400;
+    font-family: var(--exa11y-font-heading);
+}
+
+/* First heading inside a card becomes the ExploreXR header band. */
+.exa11y-section > h2:first-child {
+    padding: 12px 20px;
+    background-color: var(--exa11y-surface-band);
+    border-bottom: 1px solid var(--exa11y-secondary);
+    color: var(--exa11y-ink);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Category groups: a labeled heading wrapping one or more section cards,
+   used on the Pro pages to organize related settings. */
+.exa11y-category-group {
+    margin-bottom: 32px;
+}
+
+.exa11y-category-group:last-child {
+    margin-bottom: 0;
+}
+
+.exa11y-category-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--exa11y-brand);
+    color: var(--exa11y-ink);
+    font-size: 16px;
+    font-weight: 600;
+    font-family: var(--exa11y-font-heading);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.exa11y-category-heading .dashicons {
+    color: var(--exa11y-brand);
+}
+
+.exa11y-category-body .exa11y-section {
+    margin-bottom: 16px;
+}
+
+.exa11y-category-body .exa11y-section:last-child {
+    margin-bottom: 0;
+}
+
+/* Default text color and line height within the plugin admin area */
+.exa11y-admin-wrap,
+.exa11y-admin-wrap p,
+.exa11y-admin-wrap th,
+.exa11y-admin-wrap td,
+.exa11y-admin-wrap label {
+    color: var(--exa11y-ink);
+    line-height: 1.5;
+    font-family: var(--exa11y-font-body);
+}
+
+.exa11y-admin-wrap p.description {
+    color: #666666;
+    font-size: 0.9em;
+    font-style: normal;
+    margin-top: 6px;
+    font-family: var(--exa11y-font-body);
+}
+
+/* Scoped heading styles (for sections, etc.) */
+.exa11y-admin-wrap h2 {
+    font-size: 20px;
+    color: var(--exa11y-ink);
+    font-weight: 400;
+    font-family: var(--exa11y-font-heading);
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.exa11y-admin-wrap h3 {
+    font-size: 18px;
+    color: var(--exa11y-ink);
+    font-weight: 400;
+    font-family: var(--exa11y-font-heading);
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.exa11y-admin-wrap h4 {
+    font-size: 16px;
+    color: var(--exa11y-ink);
+    font-weight: 600;
+    font-family: var(--exa11y-font-body);
+    margin-top: 15px;
+    margin-bottom: 8px;
+}
+
+/* Form Table Styling - often used by WordPress settings API */
+.exa11y-admin-wrap .form-table {
+    width: 100%;
+    border-spacing: 0;
+    margin-bottom: 20px;
+}
+
+.exa11y-admin-wrap .form-table th {
+    width: 250px; /* Adjust as needed */
+    padding: 15px 20px 15px 0;
+    vertical-align: top;
+    text-align: left;
+    font-weight: 500; /* Medium weight for labels */
+    color: var(--exa11y-ink);
+}
+
+.exa11y-admin-wrap .form-table td {
+    padding: 15px 0;
+    vertical-align: top;
+}
+
+.exa11y-admin-wrap .form-table tr:not(:last-child) td,
+.exa11y-admin-wrap .form-table tr:not(:last-child) th {
+    border-bottom: 1px solid #e5e5e5; /* Light separator for rows */
+}
+
+/* Compact settings layout: only direct settings tables inside EXA11Y cards.
+   Capped column count (3 on wide screens,2 on medium,1 on mobile) instead of
+   auto-fit,which packed ~5 cards per row on wide admin screens. */
+.exa11y-admin-wrap .exa11y-section > .form-table {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 0 0 12px;
+    border-spacing: 0;
+}
+
+@media (max-width: 1199px) {
+    .exa11y-admin-wrap .exa11y-section > .form-table {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 782px) {
+    .exa11y-admin-wrap .exa11y-section > .form-table {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.exa11y-admin-wrap .exa11y-section > .form-table > tbody {
+    display: contents;
+}
+
+.exa11y-admin-wrap .exa11y-section > .form-table > tbody > tr {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    margin: 0;
+    padding: 14px;
+    background: var(--exa11y-surface-alt);
+    border: 1px solid var(--exa11y-border);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.exa11y-admin-wrap .exa11y-section > .form-table > tbody > tr:hover {
+    border-color: rgba(42, 172, 226, 0.45);
+    box-shadow: 0 3px 10px rgba(42, 172, 226, 0.08);
+}
+
+.exa11y-admin-wrap .exa11y-section > .form-table > tbody > tr > th,.exa11y-admin-wrap .exa11y-section > .form-table > tbody > tr > td {
+    display: block;
+    width: auto;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+}
+
+.exa11y-admin-wrap .exa11y-section > .form-table > tbody > tr > th {
+    margin: 0 0 8px;
+    color: var(--exa11y-ink);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.exa11y-admin-wrap .exa11y-section > .form-table > tbody > tr > td {
+    flex: 1;
+}.exa11y-admin-wrap .exa11y-section > .form-table > tbody > tr:has(.exa11y-position-selector),
+.exa11y-admin-wrap .exa11y-section > .form-table > tbody > tr:has(.exa11y-font-size-grid),
+.exa11y-admin-wrap .exa11y-section > .form-table > tbody > tr:has(.exa11y-color-theme-settings) {
+    grid-column: 1 / -1;
+}
+
+.exa11y-admin-wrap .exa11y-section > .form-table input[type="text"],.exa11y-admin-wrap .exa11y-section > .form-table input[type="number"],.exa11y-admin-wrap .exa11y-section > .form-table input[type="email"],.exa11y-admin-wrap .exa11y-section > .form-table input[type="url"],.exa11y-admin-wrap .exa11y-section > .form-table input[type="password"],.exa11y-admin-wrap .exa11y-section > .form-table select,.exa11y-admin-wrap .exa11y-section > .form-table textarea {
+    max-width: 100%;
+}
+
+.exa11y-admin-wrap .exa11y-section > .form-table .wp-picker-container {
+    max-width: 100%;
+}
+
+.exa11y-admin-wrap .exa11y-section > .form-table .wp-picker-input-wrap {
+    white-space: normal;
+}
+
+@media screen and (max-width: 782px) {
+}
+
+/* Input Fields */
+.exa11y-admin-wrap input[type="text"],
+.exa11y-admin-wrap input[type="number"],
+.exa11y-admin-wrap input[type="email"],
+.exa11y-admin-wrap input[type="url"],
+.exa11y-admin-wrap input[type="password"],
+.exa11y-admin-wrap input[type="search"],
+.exa11y-admin-wrap select,
+.exa11y-admin-wrap textarea {
+    background-color: var(--exa11y-surface);
+    border: 2px solid var(--exa11y-border);
+    padding: 8px 12px;
+    font-size: 14px;
+    font-family: var(--exa11y-font-body);
+    color: var(--exa11y-ink);
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.exa11y-admin-wrap input[type="text"]:focus,
+.exa11y-admin-wrap input[type="number"]:focus,
+.exa11y-admin-wrap input[type="email"]:focus,
+.exa11y-admin-wrap input[type="url"]:focus,
+.exa11y-admin-wrap input[type="password"]:focus,
+.exa11y-admin-wrap input[type="search"]:focus,
+.exa11y-admin-wrap select:focus,
+.exa11y-admin-wrap textarea:focus {
+    border-color: var(--exa11y-brand);
+    box-shadow: 0 0 0 3px rgba(42, 172, 226, 0.3);
+    outline: none;
+}
+
+.exa11y-admin-wrap input[type="checkbox"] {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    accent-color: var(--exa11y-brand);
+}
+
+.exa11y-admin-wrap label {
+    font-weight: 500;
+    font-family: var(--exa11y-font-body);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.exa11y-admin-wrap .form-table label {
+    margin-bottom: 0;
+}
+
+.exa11y-admin-wrap .exa11y-settings-field label {
+    font-weight: normal;
+}
+
+/* Buttons */
+.exa11y-admin-wrap .button,
+.exa11y-admin-wrap button {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: var(--exa11y-font-body);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.exa11y-admin-wrap .button-primary,
+.exa11y-admin-wrap button.button-primary {
+    background-color: var(--exa11y-brand);
+    color: var(--exa11y-ink);
+    border-color: var(--exa11y-brand);
+}
+
+.exa11y-admin-wrap .button-primary:hover,
+.exa11y-admin-wrap .button-primary:focus,
+.exa11y-admin-wrap button.button-primary:hover,
+.exa11y-admin-wrap button.button-primary:focus {
+    background-color: var(--exa11y-brand-dark);
+    border-color: var(--exa11y-brand-dark);
+    color: var(--exa11y-ink);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(42, 172, 226, 0.3);
+}
+
+.exa11y-admin-wrap .button-secondary,
+.exa11y-admin-wrap button.button-secondary {
+    background-color: var(--exa11y-surface);
+    color: var(--exa11y-ink);
+    border-color: var(--exa11y-border);
+}
+
+.exa11y-admin-wrap .button-secondary:hover,
+.exa11y-admin-wrap .button-secondary:focus,
+.exa11y-admin-wrap button.button-secondary:hover,
+.exa11y-admin-wrap button.button-secondary:focus {
+    background-color: var(--exa11y-surface-alt);
+    border-color: var(--exa11y-brand);
+    color: var(--exa11y-ink);
+    transform: translateY(-1px);
+}
+
+.exa11y-settings-field {
+    margin-bottom: 20px; /* Increased spacing */
+    padding-bottom: 20px; /* Add padding for border if inside a card */
+    border-bottom: 1px solid #e5e5e5; /* Separator for fields if not in a form-table */
+}
+.exa11y-settings-field:last-child {
+    border-bottom: none;
+}
+
+.exa11y-settings-field label {
+    font-weight: 500; /* Consistent label weight */
+}
+
+/* Position selector container in admin */
+.exa11y-admin-wrap .exa11y-position-selector {
+    margin-bottom: 20px;
+}
+
+/* Styles for the position selector with vertical/horizontal options - specific to admin */
+.exa11y-admin-wrap .exa11y-position-main,
+.exa11y-admin-wrap .exa11y-position-secondary {
+    margin-bottom: 20px;
+    border: none; /* Remove border, it's part of the card now */
+    padding: 0; /* Remove padding, rely on section/card padding */
+    background: transparent; /* Inherit card background */
+}
+
+.exa11y-admin-wrap .exa11y-position-main h4,
+.exa11y-admin-wrap .exa11y-position-secondary h4 {
+    /* These are like sub-section titles, styled by .exa11y-section h2 or similar logic if needed */
+    /* If they are direct children and need specific styling: */
+    font-size: 16px; /* Adjust size if needed */
+    font-weight: 600;
+    color: #1d1d1f;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e5e5; /* Consistent with section titles */
+}
+
+.exa11y-admin-wrap .exa11y-vertical-options,
+.exa11y-admin-wrap .exa11y-horizontal-options {
+    display: flex;
+    gap: 12px; /* Consistent gap */
+}
+
+.exa11y-admin-wrap .exa11y-vertical-option,
+.exa11y-admin-wrap .exa11y-horizontal-option {
+    flex: 1;
+    padding: 15px 10px;
+    border: 1px solid #d2d2d7;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+    background-color: #f5f5f7;
+    color: #1d1d1f;
+}
+
+.exa11y-admin-wrap .exa11y-vertical-option:hover:not(.selected),
+.exa11y-admin-wrap .exa11y-horizontal-option:hover:not(.selected) {
+    background-color: #e9e9eb;
+    border-color: #c6c6c8;
+}
+
+.exa11y-admin-wrap .exa11y-vertical-option.selected,
+.exa11y-admin-wrap .exa11y-horizontal-option.selected {
+    background-color: var(--exa11y-brand);
+    border-color: var(--exa11y-brand);
+    color: var(--exa11y-on-brand);
+}
+.exa11y-admin-wrap .exa11y-vertical-option.selected .dashicons,
+.exa11y-admin-wrap .exa11y-horizontal-option.selected .dashicons {
+    color: #fff;
+}
+
+.exa11y-admin-wrap .exa11y-vertical-option input[type="radio"],
+.exa11y-admin-wrap .exa11y-horizontal-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.exa11y-admin-wrap .exa11y-vertical-option .dashicons,
+.exa11y-admin-wrap .exa11y-horizontal-option .dashicons {
+    display: block;
+    font-size: 24px; /* Adjusted icon size */
+    margin: 0 auto 8px;
+    color: #333; /* Default icon color */
+}
+
+.exa11y-admin-wrap .exa11y-vertical-option .position-label,
+.exa11y-admin-wrap .exa11y-horizontal-option .position-label {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* WordPress Admin Bar Icon */
+#wpadminbar #wp-admin-bar-exa11y .ab-icon {
+    font-family: dashicons !important;
+}
+#wpadminbar #wp-admin-bar-exa11y .ab-icon:before {
+    content: "\f110"; /* Example Dashicon: universal access */
+    top: 2px;
+}
+
+/* Admin Menu Icon */
+#adminmenu .toplevel_page_exa11y .wp-menu-image:before {
+    font-family: dashicons !important;
+    content: "\f508"; /* Example Dashicon: accessibility */
+}
+#adminmenu .toplevel_page_exa11y:hover .wp-menu-image:before,
+#adminmenu .toplevel_page_exa11y.wp-has-current-submenu .wp-menu-image:before,
+#adminmenu .toplevel_page_exa11y.current .wp-menu-image:before {
+    color: #fff; /* Or WordPress accent color */
+}
+
+/* General Admin Page Styling */
+.exa11y-admin-wrap {
+    margin: 20px 20px 20px 0;
+}
+
+/* Admin Footer */
+@media screen and (max-width: 782px) {
+    .exa11y-section {
+        padding: 15px;
+    }
+}
+
+/* Tab System Styles */
+.exa11y-tabs-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #d2d2d7;
+    position: relative;
+}
+
+.exa11y-tab-button {
+    display: flex;
+    align-items: center;
+    padding: 12px 18px;
+    background-color: #f5f5f7;
+    border: 1px solid #d2d2d7;
+    border-bottom: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: -1px;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.exa11y-tab-button:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+.exa11y-tab-button.active {
+    background-color: #fff;
+    color: var(--exa11y-brand-dark);
+    border-bottom-color: #fff;
+    position: relative;
+    z-index: 1;
+}
+
+.exa11y-tab-button .dashicons {
+    margin-right: 8px;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+/* Tab panels are hidden unless active. admin-tabs.js toggles the `.active`
+   class and the `hidden` attribute together; the base rule keeps a panel hidden
+   whether it is simply inactive or carries `[hidden]`, and the `.active` rule
+   (higher specificity) always wins. !important guards against WordPress core
+   and theme styles that also target these panels. */
+.exa11y-tab-panel {
+    display: none !important;
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.exa11y-tab-panel.active {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    height: auto !important;
+    overflow: visible !important;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Make tabs responsive */
+@media screen and (max-width: 782px) {
+    .exa11y-tabs-navigation {
+        flex-direction: column;
+        gap: 5px;
+        border-bottom: none;
+    }
+    .exa11y-tab-button {
+        border: 1px solid #d2d2d7;
+        margin-bottom: 0;
+    }
+    .exa11y-tab-button.active {
+        border-bottom-color: #d2d2d7;
+    }
+}
+
+/* Field Subitems */
+
+/* Settings Panel */
+.exa11y-settings-panel {
+    background: #fff;
+    border: 1px solid #d2d2d7;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.exa11y-settings-description {
+    color: #6e6e73;
+    font-size: 14px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+/* Font Size Grid Layout */
+.exa11y-font-size-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.exa11y-font-size-item {
+    background: #f5f5f7;
+    border: 1px solid #d2d2d7;
+    padding: 15px;
+    transition: all 0.2s ease;
+}
+
+.exa11y-font-size-item:hover {
+    border-color: var(--exa11y-brand);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.exa11y-font-size-label {
+    display: block;
+    font-weight: 500;
+    color: #1d1d1f;
+    margin-bottom: 10px;
+}
+
+.exa11y-input-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.exa11y-input-group input[type="number"] {
+    width: 80px;
+    padding: 8px 12px;
+    border: 1px solid #d2d2d7;
+    font-size: 14px;
+    color: #1d1d1f;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+.exa11y-input-group input[type="number"]:hover {
+    border-color: #b3b3b3;
+}
+
+.exa11y-input-group input[type="number"]:focus {
+    border-color: var(--exa11y-brand);
+    box-shadow: var(--exa11y-focus);
+    outline: none;
+}
+
+.exa11y-unit {
+    color: #6e6e73;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.exa11y-field-hint {
+    color: #6e6e73;
+    font-size: 13px;
+    margin: 8px 0 0 0;
+    line-height: 1.4;
+}
+
+.form-field {
+                    margin-bottom: 30px;
+                    padding-bottom: 20px;
+                    border-bottom: 1px solid #eee;
+                }
+                .form-field h3 {
+                    margin-top: 0;
+                    margin-bottom: 10px;
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+                .exa11y-font-size-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                    gap: 20px;
+                    margin-top: 15px;
+                }
+                .exa11y-font-size-item {
+                    margin-bottom: 15px;
+                }
+                .exa11y-font-size-label {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 5px;                }
+                .exa11y-input-group {
+                    display: flex;
+                    align-items: center;
+                }
+                .exa11y-unit {
+                    margin-left: 5px;
+                    color: #666;
+                }
+                .exa11y-field-hint {
+                    margin-top: 5px;
+                    font-size: 12px;
+                    color: #666;
+                }
+                .exa11y-position-selector {
+                    max-width: 500px;
+                }
+
+/* Enhanced Color Picker Styles */
+.exa11y-admin-wrap .wp-picker-container {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+.exa11y-admin-wrap .wp-picker-container .wp-color-result {
+    height: 30px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+}
+
+.exa11y-admin-wrap .wp-picker-container .wp-color-result:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.exa11y-admin-wrap .wp-picker-container .wp-color-result-text {
+    line-height: 28px;
+}
+
+.exa11y-admin-wrap .wp-picker-container .wp-picker-input-wrap input[type="text"] {
+    height: 30px;
+    width: 80px !important;
+    margin-right: 5px;
+}
+
+.exa11y-admin-wrap .wp-picker-container .wp-picker-clear {
+    height: 30px;
+    line-height: 28px;
+}
+
+.exa11y-admin-wrap .wp-picker-container .iris-picker {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-color: #d2d2d7;
+}
+
+.exa11y-admin-wrap .wp-picker-container .iris-picker .iris-palette {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+/* Color Format Display Styles */
+.exa11y-color-format-display {
+    background-color: #f5f5f7;
+    border: 1px solid #d2d2d7;
+    padding: 8px 10px;
+    margin-top: 10px;
+    font-size: 12px;
+    max-width: 250px;
+}
+
+.exa11y-color-format-item {
+    margin-bottom: 4px;
+    color: #333;
+    font-family: Consolas, Monaco, monospace;
+}
+
+.exa11y-color-format-item:last-child {
+    margin-bottom: 0;
+}
+
+.exa11y-color-format-item span {
+    font-weight: bold;
+    display: inline-block;
+    width: 40px;
+    color: #666;
+}
+
+/* Make sure color picker adjustments don't get clipped */
+.exa11y-admin-wrap .wp-picker-holder {
+    position: absolute;
+    z-index: 100;
+}
+
+.color-format-info {
+    font-size: 11px;
+    color: #666;
+    font-style: italic;
+    margin-top: 3px;
+}
+
+/* Disabled field styling */
+.exa11y-admin-wrap input[disabled],
+.exa11y-admin-wrap select[disabled],
+.exa11y-admin-wrap textarea[disabled],
+.exa11y-admin-wrap button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+
+.exa11y-admin-wrap .color-picker[disabled] {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+#exa11y-current-settings-display,
+#exa11y-system-info-display {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--exa11y-border);
+}
+
+/* Field container styles for Tools page */
+.exa11y-field-container {
+    margin-bottom: 20px;
+}
+
+.exa11y-field-file-input {
+    margin-bottom: 10px;
+}
+
+/* Import/Export specific styles */
+.exa11y-import-export-container {
+    display: flex;
+    gap: 30px;
+    margin-top: 15px;
+}
+
+.exa11y-import-section,
+.exa11y-export-section {
+    flex: 1;
+    padding: 15px;
+    background: #f8f9fa;
+    border: 1px solid #e1e5e9;
+}
+
+.exa11y-import-section h4,
+.exa11y-export-section h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--exa11y-ink);
+}
+
+.exa11y-export-section .button {
+    background: var(--exa11y-brand);
+    border-color: var(--exa11y-brand);
+    color: #000;
+}
+
+.exa11y-import-section .button {
+    background: #0073aa;
+    border-color: #0073aa;
+    color: #fff;
+}
+
+.exa11y-import-section .button:hover,
+.exa11y-export-section .button:hover {
+    opacity: 0.9;
+}
+
+/* Response messages */
+.exa11y-field-response {
+    margin-top: 10px;
+}
+
+.exa11y-field-response .notice {
+    margin: 0;
+    padding: 8px 12px;
+}
+
+            /* Inline notice styles for validation messages */
+            .notice.inline {
+                display: inline-block;
+                width: 100%;
+                box-sizing: border-box;
+                border-left: 4px solid;
+                background: #fff;
+                box-shadow: 0 1px 1px rgba(0,0,0,.04);
+            }
+            .notice.inline.notice-success {
+                border-left-color: #00a32a;
+                background-color: #f0f9ff;
+            }
+            .notice.inline.notice-error {
+                border-left-color: #d63638;
+                background-color: #fef2f2;
+            }
+            .notice.inline p {
+                margin: 0;
+                color: #1d2327;
+                font-size: 13px;
+            }
+            .exa11y-section {
+                margin-bottom: 30px;
+                padding: 20px;
+                background: #fff;
+                border: 1px solid #ddd;
+            }
+            .exa11y-section h2 {
+                margin: 0 0 20px 0;
+                padding-bottom: 10px;
+                border-bottom: 1px solid #eee;
+            }
+/* Admin redesign v2: page interiors only. */
+.exa11y-admin-wrap {
+    max-width: 100%;
+}
+
+.exa11y-admin-wrap .exa11y-category-group {
+    margin: 0 0 36px;
+}
+
+.exa11y-admin-wrap .exa11y-category-heading {
+    border: 0;
+    margin: 0 0 14px;
+    padding: 0;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.exa11y-admin-wrap .exa11y-category-heading .dashicons {
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+}
+
+.exa11y-admin-wrap .exa11y-section {
+    padding: 28px;
+    margin-bottom: 24px;
+    border: 1px solid var(--exa11y-border);
+    border-radius: 0;
+    box-shadow: 0 1px 3px rgba(13, 21, 44, 0.08);
+}
+
+.exa11y-admin-wrap .exa11y-section h2,
+.exa11y-admin-wrap .exa11y-section > h2:first-child {
+    margin: 0 0 18px !important;
+    padding: 0 0 12px;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--exa11y-border);
+    color: var(--exa11y-ink);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.exa11y-admin-wrap .exa11y-tabs {
+    display: grid;
+    gap: 24px;
+}
+
+.exa11y-admin-wrap .exa11y-tabs-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 8px;
+    background: var(--exa11y-surface);
+    border: 1px solid var(--exa11y-border);
+    box-shadow: 0 1px 3px rgba(13, 21, 44, 0.08);
+}
+
+.exa11y-admin-wrap .exa11y-tab-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 9px 14px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--exa11y-ink);
+    box-shadow: none;
+}
+
+.exa11y-admin-wrap .exa11y-tab-button.active,
+.exa11y-admin-wrap .exa11y-tab-button[aria-selected="true"] {
+    background: var(--exa11y-secondary);
+    color: #fff;
+}
+
+.exa11y-admin-wrap .exa11y-tab-button .dashicons {
+    color: currentColor;
+}
+
+.exa11y-admin-wrap .exa11y-tabs-content {
+    min-width: 0;
+}
+
+.exa11y-admin-wrap .exa11y-section > .form-table {
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    gap: 18px;
+}
+
+.exa11y-admin-wrap .exa11y-section > .form-table > tbody > tr {
+    padding: 20px;
+    background: #fff;
+}
+
+.exa11y-admin-wrap .form-table label,
+.exa11y-admin-wrap label:has(input[type="checkbox"]),
+.exa11y-admin-wrap label:has(input[type="radio"]),
+.exa11y-admin-wrap .exa11y-choice {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    line-height: 1.45;
+    flex-direction: row;
+    align-content: flex-start;
+    flex-wrap: nowrap;
+    justify-content: center;
+    text-align: left;
+}
+
+.exa11y-admin-wrap .exa11y-choice-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.exa11y-admin-wrap .exa11y-choice {
+    width: 100%;
+    padding: 12px 14px;
+    background: var(--exa11y-surface);
+    border: 1px solid var(--exa11y-border);
+}
+
+.exa11y-admin-wrap .exa11y-choice input[type="checkbox"],
+.exa11y-admin-wrap .exa11y-choice input[type="radio"],
+.exa11y-admin-wrap label input[type="checkbox"],
+.exa11y-admin-wrap label input[type="radio"] {
+    flex: 0 0 auto;
+    margin: 2px 0 0;
+}
+
+.exa11y-admin-wrap .exa11y-choice span {
+    display: grid;
+    gap: 3px;
+}
+
+.exa11y-admin-wrap .exa11y-choice small {
+    color: var(--exa11y-ink-soft);
+    font-size: 12px;
+}
+
+.exa11y-admin-wrap input[type="text"],
+.exa11y-admin-wrap input[type="number"],
+.exa11y-admin-wrap input[type="email"],
+.exa11y-admin-wrap input[type="url"],
+.exa11y-admin-wrap input[type="password"],
+.exa11y-admin-wrap input[type="search"],
+.exa11y-admin-wrap input[type="date"],
+.exa11y-admin-wrap select,
+.exa11y-admin-wrap textarea {
+    min-height: 42px;
+    border: 1px solid #b8c2cc;
+    background: #fff;
+    box-shadow: 0 1px 0 rgba(13, 21, 44, 0.04);
+}
+
+.exa11y-admin-wrap input[type="checkbox"],
+.exa11y-admin-wrap input[type="radio"] {
+    accent-color: var(--exa11y-brand);
+}
+
+.exa11y-admin-wrap .exa11y-nested-options {
+    margin-top: 18px;
+    padding: 18px;
+    background: var(--exa11y-surface-alt);
+    border: 1px solid var(--exa11y-border);
+    border-left: 4px solid var(--exa11y-brand);
+}
+
+.exa11y-admin-wrap .exa11y-nested-options h4 {
+    margin-top: 0;
+}
+
+.exa11y-admin-wrap .is-hidden {
+    display: none;
+}
+
+.exa11y-admin-wrap .exa11y-button-icon {
+    margin: 2px 6px 0 0;
+}.exa11y-admin-wrap .exa11y-field-result {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.exa11y-admin-wrap .exa11y-statement-box {
+    margin-top: 10px;
+    padding: 18px;
+    background: var(--exa11y-surface-alt);
+    border: 1px solid var(--exa11y-border);
+}
+
+.exa11y-admin-wrap #exa11y-current-settings-textarea {
+    min-height: 400px;
+}
+
+.exa11y-admin-wrap .exa11y-separated-description {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--exa11y-border);
+}
+
+.exa11y-admin-wrap .preview-notice {
+    padding: 15px;
+    background-color: #e7f3ff;
+    border: 1px solid #b8daff;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.exa11y-admin-wrap .preview-notice p {
+    margin: 0;
+}
+
+.exa11y-admin-wrap .preview-notice p + p {
+    margin-top: 10px;
+}
+
+.exa11y-admin-wrap .position-info {
+    margin-top: 10px;
+    color: var(--exa11y-ink-soft);
+    font-size: 12px;
+    font-style: italic;
+}
+
+.exa11y-admin-wrap .wp-picker-container {
+    display: grid;
+    gap: 10px;
+    max-width: 360px;
+    margin: 0 0 12px;
+}
+
+.exa11y-admin-wrap .wp-picker-container .wp-color-result {
+    min-height: 36px;
+    overflow: hidden;
+}
+
+.exa11y-admin-wrap .wp-picker-container .wp-color-result-text {
+    min-height: 34px;
+    padding: 0 12px;
+    font-weight: 700;
+    background: transparent;
+}
+
+.exa11y-admin-wrap .exa11y-color-format-display {
+    max-width: 360px;
+    padding: 10px 12px;
+    background: #fff;
+    border-color: var(--exa11y-border);
+    color: var(--exa11y-ink);
+}
+
+.exa11y-admin-wrap .exa11y-color-format-item span {
+    color: inherit;
+}
+
+@media screen and (max-width: 1100px) {
+    .exa11y-admin-wrap .exa11y-section > .form-table {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media screen and (max-width: 782px) {
+    .exa11y-admin-wrap {
+        padding: 12px;
+    }
+
+    .exa11y-admin-wrap .exa11y-section {
+        padding: 20px;
+    }
+}
+
+/* Overflow and contrast fixes after redesign QA. */
+.exa11y-admin-wrap,
+.exa11y-admin-wrap *,
+.exa11y-admin-wrap *::before,
+.exa11y-admin-wrap *::after {
+    box-sizing: border-box;
+}
+
+.exa11y-admin-wrap {
+    max-width: calc(100% - 20px);
+    overflow-x: clip;
+}
+
+.exa11y-admin-wrap .exa11y-section > .form-table {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    width: 100%;
+    min-width: 0;
+}
+
+.exa11y-admin-wrap .exa11y-section > .form-table > tbody > tr,.exa11y-admin-wrap .form-table th,.exa11y-admin-wrap .form-table td {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+
+.exa11y-admin-wrap input[type="text"],
+.exa11y-admin-wrap input[type="number"],
+.exa11y-admin-wrap input[type="email"],
+.exa11y-admin-wrap input[type="url"],
+.exa11y-admin-wrap input[type="password"],
+.exa11y-admin-wrap input[type="search"],
+.exa11y-admin-wrap input[type="date"],
+.exa11y-admin-wrap select,
+.exa11y-admin-wrap textarea {
+    max-width: 100%;
+    min-width: 0;
+}
+
+.exa11y-admin-wrap .button,
+.exa11y-admin-wrap button,
+.exa11y-admin-wrap input[type="submit"].button,
+.exa11y-admin-wrap input[type="button"].button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 36px;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.25;
+    color: #fff;
+    text-shadow: none;
+}
+
+.exa11y-admin-wrap .button-secondary:not(.button-primary),
+.exa11y-admin-wrap button.button-secondary:not(.button-primary),
+.exa11y-admin-wrap .wp-picker-clear {
+    color: var(--exa11y-ink);
+    background: #fff;
+    border-color: #b8c2cc;
+}
+
+.exa11y-admin-wrap .button-secondary:not(.button-primary):hover,
+.exa11y-admin-wrap .button-secondary:not(.button-primary):focus,
+.exa11y-admin-wrap button.button-secondary:not(.button-primary):hover,
+.exa11y-admin-wrap button.button-secondary:not(.button-primary):focus,
+.exa11y-admin-wrap .wp-picker-clear:hover,
+.exa11y-admin-wrap .wp-picker-clear:focus {
+    color: var(--exa11y-ink);
+    background: var(--exa11y-surface-alt);
+    border-color: var(--exa11y-brand-dark);
+}
+
+.exa11y-admin-wrap input[type="submit"].button-primary,
+.exa11y-admin-wrap .button-primary,
+.exa11y-admin-wrap button.button-primary {
+    color: #fff;
+}
+
+.exa11y-admin-wrap .wp-picker-container {
+    width: min(100%, 360px);
+    max-width: 100%;
+    display: grid;
+    gap: 10px;
+    overflow: visible;
+}
+
+.exa11y-admin-wrap .wp-picker-container .wp-color-result {
+    width: 100%;
+    min-height: 38px;
+    padding: 0;
+    overflow: hidden;
+    background-image: none !important;
+}
+
+.exa11y-admin-wrap .wp-picker-container .wp-color-result-text {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 0 12px;
+    border: 0;
+    background: transparent !important;
+    text-shadow: none !important;
+}
+
+.exa11y-admin-wrap .wp-picker-container .wp-picker-input-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+}
+
+.exa11y-admin-wrap .wp-picker-container .wp-picker-input-wrap input[type="text"] {
+    flex: 1 1 130px;
+    width: auto !important;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.exa11y-admin-wrap .wp-picker-holder {
+    max-width: calc(100vw - 80px);
+}
+
+.exa11y-admin-wrap .iris-picker {
+    max-width: 100%;
+}
+
+/* Requested section density rules. */
+.exa11y-admin-wrap .exa11y-single-column-section > .form-table,.exa11y-admin-wrap .exa11y-single-column-section .form-table {
+    grid-template-columns: minmax(0, 1fr) !important;
+}
+
+.exa11y-admin-wrap .exa11y-single-column-section > .form-table > tbody > tr,.exa11y-admin-wrap .exa11y-single-column-section .form-table > tbody > tr {
+    grid-column: 1 / -1;
+}
+
+.exa11y-admin-wrap .exa11y-two-column-section > .form-table,.exa11y-admin-wrap .exa11y-two-column-section .form-table {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.exa11y-admin-wrap .exa11y-two-column-section > .form-table > tbody,.exa11y-admin-wrap .exa11y-two-column-section .form-table > tbody {
+    display: contents !important;
+}
+
+.exa11y-admin-wrap .exa11y-two-column-section > .form-table > tbody > tr,.exa11y-admin-wrap .exa11y-two-column-section .form-table > tbody > tr {
+    display: flex !important;
+    flex-direction: column;
+}
+
+.exa11y-admin-wrap .exa11y-spacious-controls > .form-table {
+    gap: 24px;
+}
+
+.exa11y-admin-wrap .exa11y-spacious-controls > .form-table > tbody > tr {
+    padding: 28px;
+}
+
+.exa11y-admin-wrap .exa11y-spacious-controls .form-table label,
+.exa11y-admin-wrap .exa11y-spacious-controls .exa11y-choice,
+.exa11y-admin-wrap .exa11y-spacious-controls .exa11y-vertical-option,
+.exa11y-admin-wrap .exa11y-spacious-controls .exa11y-horizontal-option {
+    gap: 14px;
+}
+
+.exa11y-admin-wrap .exa11y-spacious-controls .exa11y-vertical-option,
+.exa11y-admin-wrap .exa11y-spacious-controls .exa11y-horizontal-option {
+    min-height: 72px;
+    padding: 18px;
+}
+
+.exa11y-admin-wrap .exa11y-spacious-controls .dashicons {
+    flex: 0 0 auto;
+}
+
+.exa11y-admin-wrap .button .dashicons,
+.exa11y-admin-wrap button .dashicons,
+.exa11y-admin-wrap a.button .dashicons,
+.exa11y-admin-wrap input.button + .dashicons,
+.exa11y-admin-wrap .exa11y-quick-actions .dashicons,
+.exa11y-admin-wrap .exa11y-tab-button .dashicons {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    margin: 0;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.exa11y-admin-wrap .button,
+.exa11y-admin-wrap button,
+.exa11y-admin-wrap a.button,
+.exa11y-admin-wrap .exa11y-quick-actions a,
+.exa11y-admin-wrap .exa11y-tab-button {
+    align-items: center;
+}
+
+.exa11y-admin-wrap .exa11y-button-icon {
+    margin: 0;
+}
+
+@media screen and (max-width: 900px) {
+    .exa11y-admin-wrap .exa11y-two-column-section > .form-table,.exa11y-admin-wrap .exa11y-two-column-section .form-table {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+}
